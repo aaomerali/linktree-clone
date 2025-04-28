@@ -5,8 +5,8 @@ const linksSlice = createSlice ({
     name: 'links' ,
     initialState : [],
     reducers: {
-        addLink: (state , action) => {
-            state.push = action.payload;
+        addLink: (state, action) => {
+            state.push(action.payload); 
         },
         removeLink: (state, action) => {
             return state.filter(link => link.id !== action.payload);
