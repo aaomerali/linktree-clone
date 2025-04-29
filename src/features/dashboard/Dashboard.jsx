@@ -29,7 +29,7 @@ export default function Dashboard() {
     };
 
     return (
-        <div className="container mx-auto p-4 flex flex-col items-center">
+        <div className="container mx-auto p-4 pt-20 flex flex-col items-center">
             {/* Profile Section */}
             <div className="mb-8 w-full max-w-2xl">
                 <div className="flex flex-col items-center gap-4">

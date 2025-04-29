@@ -7,7 +7,7 @@ function Navbar() {
   const dispatch = useDispatch();
 
   return (
-    <nav className="bg-gray-800 text-white p-4 mb-10">
+    <nav className="bg-gray-800 text-white p-4">
       <div className="container mx-auto flex justify-between items-center">
         <Link to="/" className="text-xl font-bold">LinkTreeClone</Link>
         
