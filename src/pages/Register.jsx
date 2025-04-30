@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { login } from '../features/auth/authSlice';
+import {registerUser , loginUser } from '../features/auth/authSlice';
 import { v4 as uuidv4 } from 'uuid';
 
 function Register() {
@@ -29,31 +29,39 @@ function Register() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!validateForm()) return;
-
-    // Check local storage for existing users
-    const users = JSON.parse(localStorage.getItem('users')) || [];
-    const existingUser = users.find(user => user.email === formData.email || user.username === formData.username);
-    
-    if (existingUser) {
-      setErrors({ email: 'Email or Username already registered' });
+  
+    // Check for existing users in localStorage
+    const existingUsers = JSON.parse(localStorage.getItem('users')) || [];
+    const emailExists = existingUsers.some(user => user.email === formData.email);
+    const usernameExists = existingUsers.some(user => user.username === formData.username);
+  
+    if (emailExists) {
+      setErrors({ email: 'Email already registered' });
       return;
     }
-
-    // Create new user object
+  
+    if (usernameExists) {
+      setErrors({ username: 'Username is already taken' });
+      return;
+    }
+  
+    // Create new user object with all fields
     const newUser = {
       id: uuidv4(),
-      ...formData,
+      username: formData.username,
+      email: formData.email,
+      password: formData.password, // Note: In real app, hash password
       profilePicture: null,
       bio: '',
-      links: []
+      links: [],
+      createdAt: new Date().toISOString()
     };
-
-    // Update local storage
-    const updatedUsers = [...users, newUser];
-    localStorage.setItem('users', JSON.stringify(updatedUsers));
+  
+    // Update Redux store and localStorage
+    dispatch(registerUser(newUser));
+    dispatch(loginUser(newUser));
     
-    // Dispatch login action and redirect
-    dispatch(login(newUser));
+    // Redirect to dashboard
     navigate('/dashboard');
   };
 

@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { login } from '../features/auth/authSlice';
+import { loginUser } from '../features/auth/authSlice';
 
 function Login() {
   const dispatch = useDispatch();
@@ -38,7 +38,7 @@ function Login() {
     }
 
     // Dispatch login action and redirect
-    dispatch(login(existingUser));
+    dispatch(loginUser(existingUser));
     navigate('/dashboard');
   };
 

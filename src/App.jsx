@@ -6,7 +6,6 @@ import Register from './pages/Register';
 import Dashboard from './features/dashboard/Dashboard';
 import Profile from './features/profile/Profile';
 import Navbar from './components/Navbar';
-import ReduxTest from './ResuxTest';
 
 // Public Route Component (for auth pages)
 const PublicRoute = ({ children }) => {
@@ -45,11 +44,11 @@ function App() {
             <Dashboard />
           </PrivateRoute>
         } />
-        <Route path="/test" element={
+        {/*<Route path="/test" element={
           <PrivateRoute>
             <ReduxTest />
           </PrivateRoute>
-        } />
+        } /> */}
         
         <Route path="/:username" element={
           <PrivateRoute>
